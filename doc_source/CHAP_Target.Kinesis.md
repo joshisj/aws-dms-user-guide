@@ -101,6 +101,11 @@ For `BeforeImageSettings` options, the following applies:
 **Note**  
 Amazon S3 targets don't support `BeforeImageSettings`\. For S3 targets, use only the `add-before-image-columns` transformation rule to perform before imaging during CDC\.
 
+**Note for PostgreSQL as Source**
+DMS BeforeImage column feature for source PostgreSQL will work based on the source table replica identity setting. When you use source table with "Default" setting DMS can get before image only for the primary key column. In order to get BeforeImage for all columns you need to set "replica identity" setting to "Full".
+
+NOTE: Table replica identity with full setting will generate huge information in the logs so you will see changes in the Write-Ahead(WAL) log size.
+
 ### Using a before image transformation rule<a name="CHAP_Target.Kinesis.BeforeImage.Transform-Rule"></a>
 
 As as an alternative to task settings, you can use the `add-before-image-columns` parameter, which applies a column transformation rule\. With this parameter, you can enable before imaging during CDC on data streaming targets like Kinesis\. 
